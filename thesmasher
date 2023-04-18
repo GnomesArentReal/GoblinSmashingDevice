@@ -53,7 +53,7 @@ def main_function():
   Score_feedback(Score)
 
 if Password in BadPasswords:
-  print("This is a very common password and a security risk")
+  print("This is a very common password and a security risk, do better!")
 else:
   main_function()
   print(f'There are {Chars["SpecialChars"]} Special characters')
