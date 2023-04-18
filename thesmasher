@@ -1,0 +1,57 @@
+password = input("password")
+Chars = {"SpecialChars" : 0, "Numbers" : 0, "Uppercase" : 0, "Lowercase" : 0,}
+Length = len(password)
+Score = 0
+
+def character_types(password):
+    global Chars
+    for x in password:
+      asciivalue = ord(x)
+      if asciivalue in range (48, 58):
+        Chars["Numbers"]+=1
+      elif asciivalue in range (65, 90): 
+        Chars["Uppercase"]+= 1
+      elif asciivalue in range (97, 122): 
+        Chars["Lowercase"]+= 1
+      elif asciivalue in range(32, 126):
+        Chars["SpecialChars"]+= 1
+    else: pass
+   
+
+def complexity_check(Chars):
+  Score = (Chars["SpecialChars"] * 0.1) + (Chars["Numbers"] * 0.1) + (Chars["Uppercase"] * 0.05) +(Chars["Lowercase"] * 0.04)
+  if Chars["SpecialChars"] > 0 and Chars["Numbers"] > 0 and Chars["Uppercase"] > 0 and Chars["Lowercase"] > 0:
+    Score *= 1.3
+    print("Your password has a good amount of complexity")
+  else:
+    print("You should probably add more character types")
+
+def length_check(Score):
+  global Length
+  if Length < 8:
+    Score *= 0.2
+    print("This password could be brute forced instantly because of its length")
+  elif Length < 10:
+    print("This password is short, try increasing the length")
+  else:
+    Score *= 1.2
+  print("This password is long enough")
+
+def Score_feedback(Score):
+  if Score > 1:
+    print("overall password strength:Strong")
+  elif Score < 0.6:
+    print("overall password strength:Very weak")
+  else:
+    print("overall password strength:Medium")
+  print(Score)
+
+def main_function():
+  character_types(password)
+  complexity_check(Chars)
+  Score = length_check(Score)
+  Score = Score_feedback(Score)
+
+print(f"Your password is {Length} characters long")
+print(Chars["SpecialChars"])
+main_function()
